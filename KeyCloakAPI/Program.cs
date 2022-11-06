@@ -9,6 +9,11 @@ var environment = builder.Environment;
 builder.Services.Configure<KeycloakOptions>(configuration.GetSection("Keycloak"));
 var keycloakOptions = configuration.GetSection("Keycloak").Get<KeycloakOptions>();
 
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration = "127.0.0.1:6379";
+});
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
